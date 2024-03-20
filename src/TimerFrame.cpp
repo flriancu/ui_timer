@@ -6,8 +6,6 @@ namespace view
     TimerFrame::TimerFrame():
         TimerFrameBase(nullptr)
     {
-        UpdateDisplayedTime();
-
         m_timer.Bind(wxEVT_TIMER, &TimerFrame::OnTimerUpdate, this);
     }
 
@@ -43,9 +41,9 @@ namespace view
         if (m_timer.IsRunning())
         {
             const wxDateTime currentTime = wxDateTime::Now();
-            const wxTimeSpan ellapsedTime = currentTime - m_startTime;
+            const wxTimeSpan elapsedTime = currentTime - m_startTime;
         
-            m_timerTextCtrl->SetLabel(ellapsedTime.Format("%H:%M:%S"));
+            m_timerTextCtrl->SetLabel(elapsedTime.Format("%H:%M:%S"));
         }
         else
         {
