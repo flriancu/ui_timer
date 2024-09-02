@@ -1,13 +1,14 @@
 #pragma once
 
 #include "TimerFrameBase.h"
+#include "ITimer.h"
 
 #include <wx/timer.h>
 
 
 namespace view
 {
-    class TimerFrame : public TimerFrameBase
+    class TimerFrame : public TimerFrameBase, public ITimer
     {
     public:
         TimerFrame();
@@ -25,6 +26,10 @@ namespace view
 
         void OnTimerUpdate(
             wxTimerEvent&);
+
+        void Start() override;
+
+        void Stop() override;
 
         void UpdateDisplayedTime();
     };

@@ -3,14 +3,7 @@
 
 namespace view
 {
-    TimerFrame::TimerFrame():
-        TimerFrameBase(nullptr)
-    {
-        m_timer.Bind(wxEVT_TIMER, &TimerFrame::OnTimerUpdate, this);
-    }
-
-    void TimerFrame::OnTimerStart(
-        wxCommandEvent&)
+    void TimerFrame::Start()
     {
         m_startTime = wxDateTime::Now();
 
@@ -21,13 +14,30 @@ namespace view
         UpdateDisplayedTime();
     }
 
-    void TimerFrame::OnTimerStop(
-        wxCommandEvent&)
+    void TimerFrame::Stop()
     {
         m_timer.Stop();
 
         /* Update view immediately after stopping */
         UpdateDisplayedTime();
+    }
+
+    TimerFrame::TimerFrame():
+        TimerFrameBase(nullptr)
+    {
+        m_timer.Bind(wxEVT_TIMER, &TimerFrame::OnTimerUpdate, this);
+    }
+
+    void TimerFrame::OnTimerStart(
+        wxCommandEvent&)
+    {
+        Start();
+    }
+
+    void TimerFrame::OnTimerStop(
+        wxCommandEvent&)
+    {
+        Stop();
     }
 
     void TimerFrame::OnTimerUpdate(
